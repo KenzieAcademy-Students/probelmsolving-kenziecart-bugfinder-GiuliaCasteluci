@@ -68,17 +68,14 @@ export default function HomePage(props) {
     const filteredList = Object.keys(categories).filter(
       (cat) => categories[cat]
     )
-    return [
-      ...list.filter((i) => {
-        return filteredList.includes(i.category)
-      }),
-    ]
+    return filteredList
   }
-
   useEffect(() => {
+    data.then( xyz =>{
+      console.log(xyz)
+    }) 
     data && setFilteredData(data)
   }, [data])
-
   return (
     <Container fluid style={{overflow: 'hidden'}}>
       <Row>

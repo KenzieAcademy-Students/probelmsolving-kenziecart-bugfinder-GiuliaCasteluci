@@ -10,13 +10,12 @@ import { ItemCounter } from 'components'
 export default function CartItem({ item }) {
   const { closeSidebar } = useUI()
   const { removeAllItems } = useProvideCart()
-
   return (
     <div className='item-box'>
       <div className='item-details'>
         <Container>
           <Row className='mb-2 align-items-center'>
-            <Col xs='9'>
+            <Col key={item} xs='9'>
               <div className='d-flex align-items-center'>
                 <Image
                   className='item-image mr-2'
@@ -28,10 +27,13 @@ export default function CartItem({ item }) {
                   onClick={closeSidebar}
                 >
                   <h4>Product Name</h4>
+                  <p>
+                    { item.name }               
+                    </p>
                 </Link>
               </div>
             </Col>
-            <Col xs='3' className='text-right'>
+            <Col key={item._id} xs='3' className='text-right'>
               <Button
                 aria-label={`remove Product Name from cart`}
                 className='hover:text-gray-500 transition ease-in-out duration-150'
@@ -42,18 +44,18 @@ export default function CartItem({ item }) {
             </Col>
           </Row>
           <Row className='mb-2 align-items-center'>
-            <Col xs='9'>
+            <Col key={item._id} xs='9'>
               <p className='item-label'>price</p>
             </Col>
-            <Col xs='3' className='text-right'>
+            <Col key={item._id} xs='3' className='text-right'>
               <p className='price item-value'>{` $${item.price}`}</p>
             </Col>
           </Row>
           <Row className='mb-2 align-items-center'>
-            <Col xs='6'>
+            <Col key={item._id} xs='6'>
               <p className='item-label'>quantity</p>
             </Col>
-            <Col xs='6' className='text-right'>
+            <Col key={item} xs='6' className='text-right'>
               <ItemCounter item={item} />
             </Col>
           </Row>
