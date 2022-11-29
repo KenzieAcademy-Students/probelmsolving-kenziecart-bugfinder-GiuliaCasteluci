@@ -29,6 +29,7 @@ router
       items: itemIdList,
       orderTotal: orderTotal,
     }
+    
     try {
       let order = new Order(orderData)
       const savedOrder = await order.save()

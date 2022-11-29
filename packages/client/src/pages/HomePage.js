@@ -9,6 +9,7 @@ import {
 } from 'components'
 import { CATEGORIES } from 'constants.js'
 
+
 export default function HomePage(props) {
   const { data, loading, error } = useAxios({
     config: { url: 'products' },
@@ -65,17 +66,16 @@ export default function HomePage(props) {
   }
 
   const filterByCat = (list) => {
-    const filteredList = Object.keys(categories).filter(
-      (cat) => categories[cat]
-    )
-    return filteredList
-  }
-  useEffect(() => {
-    data.then( xyz =>{
-      console.log(xyz)
-    }) 
-    data && setFilteredData(data)
-  }, [data])
+    console.log(categories)
+  const filteredList = Object.keys(categories).filter(
+    (cat) => categories[cat]
+  )
+  return filteredList
+}
+useEffect(() => {
+  data && setFilteredData(data)
+}, [data])
+
   return (
     <Container fluid style={{overflow: 'hidden'}}>
       <Row>
