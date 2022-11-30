@@ -9,7 +9,6 @@ import {
 } from 'components'
 import { CATEGORIES } from 'constants.js'
 
-
 export default function HomePage(props) {
   const { data, loading, error } = useAxios({
     config: { url: 'products' },
@@ -34,6 +33,7 @@ export default function HomePage(props) {
     const filteredList = [...data].filter((i) =>
       i.name.toLowerCase().includes(searchStr)
     )
+    setFilteredData(filteredList)
   }
 
   const handleSelect = (e) => {
@@ -66,15 +66,19 @@ export default function HomePage(props) {
   }
 
   const filterByCat = (list) => {
-    console.log(categories)
-  const filteredList = Object.keys(categories).filter(
-    (cat) => categories[cat]
-  )
-  return filteredList
-}
-useEffect(() => {
-  data && setFilteredData(data)
-}, [data])
+    const filteredList = Object.keys(categories).filter(
+      (cat) => categories[cat]
+    )
+    return [
+      ...list.filter((i) => {
+        return filteredList.includes(i.category)
+      }),
+    ]
+  }
+
+  useEffect(() => {
+    data && setFilteredData(data)
+  }, [data])
 
   return (
     <Container fluid style={{overflow: 'hidden'}}>
